@@ -196,7 +196,7 @@ rect(480, 250, 40, 10);
 fill("brown");
 rect(560, 250, 40, 10);
 
-//8. (Eigen pixel poppetje) Terraria demon eye
+//8. (Eigen pixel poppetje 16x16) Terraria demon eye
 fill("black");
 text("8. Terraria demon eye", 420, 470);
 fill("black");
