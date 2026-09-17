@@ -1,12 +1,18 @@
+//(Xerneas loopt en Yveltal vliegt, handig XY strat)
 let cloud1 = 0; //Maak namen specifiek, naam maakt geen verschil aan code.
 let cloud2 = 0;
 let cloud3 = 0;
 let cloud4 = 0;
 let sunX = 0;
 let car1 = 0;
+let car1speed = 7;
 let car2 = 0;
+let car2speed = 6;
 let carGOAT = 0;
+let carGOATspeed = 10;
 let car4 = 0;
+let car4speed = 6.5;
+let stoplight = 1;
 
 function setup() {
   createCanvas(1000, 660); //Negeer nummer achter titel, is de volgorde waarin ik heb gemaakt (interrsant terugblik)
@@ -18,7 +24,7 @@ function draw() {
 //Sun 6 
 noStroke();
 fill("orange");
-circle(0 + sunX, 80, 125);  //SunX staat voor XERNEAS LOOPT, het staat op positie X dus loopt.
+circle(0 + sunX, 80, 125);  //SunX staat voor XERNEAS LOOPT, het staat op positie X dus loopt. (Uitleg voor zelf negeer ff.)
 fill("yellow");
 circle(0 +sunX, 80, 100);
 
@@ -96,7 +102,7 @@ rect(835, 620, 110, 10, 5);
 rect(1015, 620, 110, 10, 5);
 rect(1195, 620, 110, 10, 5);
 
-//Doe nummers boven bomen, is beter te zien.
+//Doe nummers boven bomen en andere, is beter te zien.
 noStroke();
 fill("brown");
 rect(50, 400, 23, 180);
@@ -141,11 +147,21 @@ fill(50); //0-255 zonder de andere is gewoon greyscale, 255 is wit.
 rect(770, 300, 60, 150);
 rect(790, 430, 20, 150, 10);
 stroke("black");
-fill("green");
+
+
+if (stoplight === 1) {  //Veranderd stoplicht kleur
+    fill(48, 201, 55);
+  } else { fill  (25, 59, 38); }
 circle(800, 330, 35);
-fill("orange");
+
+if (stoplight === 2) {  //Veranderd stoplicht kleur
+    fill("orange");
+  } else { fill  (82, 61, 30); }
 circle(800, 372, 35);
-fill("red");
+
+if (stoplight === 3) {  //Veranderd stoplicht kleur
+    fill("red");
+  } else { fill  (74, 29, 29); }
 circle(800, 414, 35);
 
 //Cars 6 (traffic and stuff)
@@ -180,7 +196,6 @@ circle(120 + car4, 620, 40);
 //KEEP IN CASE!! Car 5 (low) fill("white"); rect(900, 530, 130, 90, 15); rect(1005, 570, 50, 50, 15); fill(50); 
 //circle(935, 620, 40); MISSING one wheel!!
 
-//Tree 4 
 //Tree 4, misschien een beetje opgetyft of oneven vergeleken met andere
 noStroke();
 fill("brown");
@@ -222,28 +237,61 @@ if (sunX > 1100) {
   sunX = -100;
 }
 
-car1 = car1 +7;
+car1 = car1 + car1speed;
 
 if (car1 > 1100) {
   car1 = -200;
 }
 
-car2 = car2 +6;
+car2 = car2 + car2speed;
 
 if (car2 > 1100) {
   car2 = -200;
 }
 
-carGOAT = carGOAT +10;
+carGOAT = carGOAT + carGOATspeed;
 
 if (carGOAT > 1100) {
   carGOAT = -200;
 }
 
-car4 = car4 +6.5;
+car4 = car4 + car4speed;
 
-if (car4 > 1100) {
+if (car4 > 1100) { //Als car4 bij 1100 op canvas zit reset het bij -200 om glad de scherm weer in te rijden
   car4 = -200;
 }
 
+if (stoplight === 1) { //Else if betekent zoals als de eerste ding niet waar is probeer de volgende
+  car1speed = 7;
+  car2speed = 6;
+  carGOATspeed = 10;
+  car4speed = 6.5;
+} else if (stoplight === 2) { 
+  car1speed = 3;
+  car2speed = 2;
+  carGOATspeed = 4;
+  car4speed = 2.25;
+} else if (stoplight === 3) {
+  car2speed = 0;
+  carGOATspeed = 0;
+  car4speed = 0;
+  if (car1 > 600) {
+  car1speed = 0;
+} else {car1speed = 3;}
 }
+
+
+
+}
+
+function keyPressed () { //Als ik op enter druk krijgt de stoplicht +1 en niet randomised 3.16 bijvoorbeeld
+if (keyCode === ENTER) {
+stoplight = stoplight +1;
+
+if (stoplight === 4) { //Als hij op 4 zit ofzo dan reset hij, net zoals de autos bij 1100. Het reset terug naar groen (1)
+  stoplight = 1;
+}
+}
+}
+
+

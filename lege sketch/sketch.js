@@ -3,6 +3,8 @@ function setup() {
   
 }
 
-function draw(1000) {
-  background(); 
+function draw() {
+  background("teal"); 
+
+  
 }
