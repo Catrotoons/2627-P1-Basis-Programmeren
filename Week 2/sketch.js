@@ -298,10 +298,6 @@ if (car4 > 440) {
 } else {car4speed = 3;}
 } 
 
-if (car1 > 601) {
-  car1speed = 7;
-} else {car1speed = 3;}
-
 }
 
 function keyPressed () { //Als ik op enter druk krijgt de stoplicht +1 en niet randomised 3.16 bijvoorbeeld
