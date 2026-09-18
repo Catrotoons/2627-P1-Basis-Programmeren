@@ -271,16 +271,36 @@ if (stoplight === 1) { //Else if betekent zoals als de eerste ding niet waar is 
   car2speed = 2;
   carGOATspeed = 4;
   car4speed = 2.25;
-} else if (stoplight === 3) {
-  car2speed = 0;
-  carGOATspeed = 0;
-  car4speed = 0;
   if (car1 > 600) {
   car1speed = 0;
 } else {car1speed = 3;}
-}
+if (car2 > 440) {
+  car2speed = 0;
+} else {car2speed = 3;}
+if (carGOAT > 600) {
+  carGOATspeed = 0;
+} else {carGOATspeed = 3;}
+if (car4 > 440) {
+  car4speed = 0;
+} else {car4speed = 3;}
+} else if (stoplight === 3) {
+  if (car1 > 600) {
+  car1speed = 0;
+} else {car1speed = 3;}
+if (car2 > 440) {
+  car2speed = 0;
+} else {car2speed = 3;}
+if (carGOAT > 600) {
+  carGOATspeed = 0;
+} else {carGOATspeed = 3;}
+if (car4 > 440) {
+  car4speed = 0;
+} else {car4speed = 3;}
+} 
 
-
+if (car1 > 601) {
+  car1speed = 7;
+} else {car1speed = 3;}
 
 }
 
