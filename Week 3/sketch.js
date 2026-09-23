@@ -15,7 +15,8 @@ function setup() {
 function draw() {
   background("red");
 
-noStroke();
+//Background
+  noStroke();
 fill("blue");
   rect(450, 0, 500, 900);
 
@@ -24,52 +25,123 @@ fill("blue");
 
   square(230, 120, 430, 20);
 
-  if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile1 === 0) {  //Laat de kleur veranderen als de muis hovert erover
- fill("red"); 
-} else fill("white"); //Rood als muis erop hovert anders gewoon wit, MouseYveltal en MouseXerneas
+  //Tile1
+  if (tile1 === 1) { 
+    fill("blue");
+  } else if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile1 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }  //Rood als muis erop hovert anders gewoon wit, MouseYveltal en MouseXerneas
   square(240, 130, 130, 20);
-  if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile2 === 0) { 
- fill("red"); 
-} else fill("white");
+  
+  //Tile2
+  if (tile2 === 1) { 
+    fill("blue");
+  } else if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile2 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(380, 130, 130, 20);
-  if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile3 === 0) { //tile1 === 0 betekent: Is vakje 1 nog leeg?
- fill("red"); 
-} else fill("white");
+  
+  if (tile3 === 1) { 
+    fill("blue");
+  } else if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile3 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(520, 130, 130, 20);
   
-  if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile4 === 0) { 
- fill("red"); 
-} else fill("white");
+  if (tile4 === 1) { 
+    fill("blue");
+  } else if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile4 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(240, 270, 130, 20);
-  if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile5 === 0) { 
- fill("red"); 
-} else fill("white");
+  
+  if (tile5 === 1) { 
+    fill("blue");
+  } else if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile5 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(380, 270, 130, 20);
-  if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile6 === 0) { 
- fill("red"); 
-} else fill("white");
+  
+if (tile6 === 1) { 
+    fill("blue");
+  } else if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile6 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }  
   square(520, 270, 130, 20);
 
-  if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile7 === 0) { 
- fill("red"); 
-} else fill("white");
+  if (tile7 === 1) { 
+    fill("blue");
+  } else if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile7 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(240, 410, 130, 20);
-  if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile8 === 0) { 
- fill("red"); 
-} else fill("white");
+  
+  if (tile8 === 1) { 
+    fill("blue");
+  } else if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile8 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(380, 410, 130, 20);
-  if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile9 === 0) { 
- fill("red"); 
-} else fill("white");
+  
+  if (tile9 === 1) { 
+    fill("blue");
+  } else if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile9 === 0) { 
+    fill("red");
+  } else {
+    fill("white");
+  }
   square(520, 410, 130, 20);
 
-  if (tile1 === 1) { 
-   fill("blue");
-  } else (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130)
 
 
 }
 
 function mousePressed () {
-  tile1 = 1; }
+if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile1 === 0) {
+  tile1 = 1;
+} 
+if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile2 === 0) {
+  tile2 = 1;
+}
+if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile3 === 0) {
+  tile3 = 1;
+}
+if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile4 === 0) {
+  tile4 = 1;
+}
+if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile5 === 0) {
+  tile5 = 1;
+}
+if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 270 && mouseY < 270 + 130 && tile6 === 0) {
+  tile6 = 1;
+}
+if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile7 === 0) {
+  tile7 = 1;
+}
+if (mouseX > 380 && mouseX < 380 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile8 === 0) {
+  tile8 = 1;
+}
+if (mouseX > 520 && mouseX < 520 + 130 && mouseY > 410 && mouseY < 410 + 130 && tile9 === 0) {
+  tile9 = 1;
+}
+
+}
+
+
 
