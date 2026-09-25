@@ -28,20 +28,45 @@ function draw() {
   square(230, 120, 430, 20);
 
   //Aesthetic border
-  
   rect(0, 640, 900, 100);
   rect(0, 0, 900, 10);
-
-  //Text red/blue
+  
+  //Start knop
+  textSize(70);
+  strokeWeight(10);
+  fill(27, 19, 48);
+  rect(720, 550, 150, 60, 20);
+  fill(241, 237, 255);
+  textSize(30);
+  text("Restart", 745, 590);
+  
+  //Text red/blue (1)-
   strokeWeight(3);
   stroke("black");
-  if (beurt === 1) {
-
-  }
   fill(241, 237, 255);
+  if (beurt === 1) {
+  }
+
+  stroke(27, 19, 48);
+  
+  //Einde game
   textSize(70);
-    text("Red's turn", 280, 80);
-    text("Blue's turn", 280, 80);
+  if (winnaar === 1) {
+    text("Player 1 has won!", 180, 80);
+  } else if (winnaar === 2) {
+    text("Player 2 has won!", 180, 80);
+  } else if  (winnaar === 3) {
+    text("Tie!", 380, 80);
+  } else {
+  
+  //-Text red/blue (2)
+  textSize(70);  
+  if (beurt === 1) {
+    text("Blue's turn!", 270 ,80);
+  }  else if (beurt === 2) {
+    text("Red's turn!", 280 ,80);
+  }
+  }
 
   //Tile 1
   if (tile1 === 1) { //Uitleg voor zelf: Als tile1 gelijk is aan 1 dan wordt het blauw (dus als je erop klikt) anders is hover gewoon rood en als er niks op zit is het wit.
@@ -55,8 +80,7 @@ function draw() {
   } else {
     fill(241, 237, 255);
   }  //Rood als muis erop hovert anders gewoon wit, MouseYveltal en MouseXerneas
-
-  square(240, 130, 130, 20);
+square(240, 130, 130, 20);
 
   //Tile 2
   if (tile2 === 1) {
@@ -159,6 +183,24 @@ function draw() {
 
 //MousePressed area:
 function mousePressed() {
+
+  if (mouseX > 720 && mouseX < 870 && mouseY > 550 && mouseY < 610) {
+    tile1 = 0
+    tile2 = 0
+    tile3 = 0
+    tile4 = 0
+    tile5 = 0
+    tile6 = 0 
+    tile7 = 0
+    tile8 = 0
+    tile9 = 0
+  if (winnaar = 0) { 
+    return;
+  }
+}
+
+if (winnaar !== 0) { return; }
+
   //Klikken
   if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile1 === 0) { //Als je klikt nu wordt het blauw, beetje zelfde code als hover maar dan met mousePressed
     tile1 = beurt;
@@ -222,6 +264,7 @@ function mousePressed() {
     if (beurt === 3) {
       beurt = 1;
     }
+  }
 
   //Winnaar 1
     if (tile1 === 1 && tile2 === 1 && tile3 === 1) { //De acht manieren waarop je kan winnen hier:
@@ -248,7 +291,7 @@ if (tile4 === 1 && tile5 === 1 && tile6 === 1) {
       winnaar = 1;
     }
 
-if (tile1 === 1 && tile2 === 5 && tile9 === 1) {
+if (tile1 === 1 && tile5 === 1 && tile9 === 1) {
       winnaar = 1;
     }
 
@@ -281,7 +324,7 @@ if (tile4 === 2 && tile5 === 2 && tile6 === 2) {
       winnaar = 2;
     }
 
-if (tile1 === 2 && tile2 === 2 && tile9 === 2) {
+if (tile1 === 2 && tile5 === 2 && tile9 === 2) {
       winnaar = 2;
     }
 
@@ -289,9 +332,13 @@ if (tile7 === 2 && tile5 === 2 && tile3 === 2) {
       winnaar = 2;
     }
 
+    if (tile1 !== 0 && tile2 !== 0 && tile3 !== 0 && tile4 !== 0 && tile5 !== 0 && tile6 !== 0 && tile7 !== 0 && tile8 !== 0 && tile9 !== 0 && winnaar === 0) {
+  winnaar = 3
+
   }
 
 }
+
 
 
 
