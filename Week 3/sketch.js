@@ -184,6 +184,7 @@ square(240, 130, 130, 20);
 //MousePressed area:
 function mousePressed() {
 
+//Restart knop code  
   if (mouseX > 720 && mouseX < 870 && mouseY > 550 && mouseY < 610) {
     tile1 = 0
     tile2 = 0
@@ -201,7 +202,7 @@ function mousePressed() {
 
 if (winnaar !== 0) { return; }
 
-  //Klikken
+  //Klikken op tiles
   if (mouseX > 240 && mouseX < 240 + 130 && mouseY > 130 && mouseY < 130 + 130 && tile1 === 0) { //Als je klikt nu wordt het blauw, beetje zelfde code als hover maar dan met mousePressed
     tile1 = beurt;
     beurt = beurt + 1;
@@ -299,7 +300,7 @@ if (tile7 === 1 && tile5 === 1 && tile3 === 1) {
       winnaar = 1;
     }
     
-    //Winnaar 2
+//Winnaar 2
 if (tile1 === 2 && tile2 === 2 && tile3 === 2) { //De acht manieren waarop je kan winnen hier:
       winnaar = 2;
     }
