@@ -86,8 +86,114 @@ if (i === 0) {
   }
 }
 
+strokeWeight(1);
+
 //6.
 for (let i = 0; i < 10; i++) {
+fill(i * 255, 0, 0); 
+//Cirkels
+if (i === 0) {
+  fill("red");
+circle(490, 270, 270);
+} else if (i === 1) {
+  fill("white");
+circle(490, 270, 240);
+} else if (i === 2) {
+  fill("red");
+  circle(490, 270, 210);
+} else if (i === 3) {
+  fill("white");
+  circle(490, 270, 180); 
+} else if (i === 4) {
+  fill("red");
+  circle(490, 270, 150);
+} else if (i === 5) {
+  fill("white");
+  circle(490, 270, 120);
+} else if (i === 6) {
+  fill("red");
+  circle(490, 270, 90);
+} else if (i === 7) {
+  fill("white");
+  circle(490, 270, 60); 
+} else if (i === 8) {
+  fill("red");
+  circle(490, 270, 30);
+} else if (i === 9) {
+  fill("white");
+  circle(490, 270, 10);
+}
+
+//7. 
+for (let i = 0; i < 21; i++) {
+  if(i === 0) {
+    fill ("white");
+    rect(630, 120, 10, 20);
+  } else if (i === 1) {
+    fill(170);
+    rect(630, 140, 30, 20);
+  } else if (i === 2) {
+    fill("white");
+    rect(630, 160, 50, 20);
+  } else if (i === 3) {
+    fill(170);
+    rect(630, 180, 70, 20);
+  } else if (i === 4) {
+    fill("white");
+    rect(630, 200, 90, 20);
+  } else if (i === 5) {
+    fill(170);
+    rect(630, 220, 110, 20);
+  } else if (i === 6) {
+    fill("white");
+    rect(630, 240, 130, 20);
+  } else if (i === 7) {
+    fill(170);
+    rect(630, 260, 150, 20);
+  } else if (i === 8) {
+    fill("white");
+    rect(630, 280, 170, 20);
+  } else if (i === 9) {
+    fill(170);
+    rect(630, 300, 190, 20);
+  } else if (i === 10) {
+    fill("white");
+    rect(630, 320, 210, 20);
+  } else if (i === 11) {
+    fill(170);
+    rect(630, 340, 190, 20);
+  } else if (i === 12) {
+    fill("white");
+    rect(630, 360, 170, 20);
+  } else if (i === 13) {
+    fill(170);
+    rect(630, 380, 150, 20);
+  } else if (i === 14) {
+    fill("white");
+    rect(630, 400, 130, 20);
+  } else if (i === 15) {
+    fill(170);
+    rect(630, 420, 110, 20);
+  } else if (i === 16) {
+    fill("white");
+    rect(630, 440, 90, 20);
+  } else if (i === 17) {
+    fill(170);
+    rect(630, 460, 70, 20);
+  } else if (i === 18) {
+    fill("white");
+    rect(630, 480, 50, 20);
+  } else if (i === 19) {
+    fill(170);
+    rect(630, 500, 30, 20);
+  } else if (i === 20) {
+    fill("white");
+    rect(630, 520, 10, 20);
+  }
+  
+}
+
+
 
 }
 
