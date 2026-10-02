@@ -93,7 +93,7 @@ for (let i = 0; i < 21; i++) {
   }
 
   if (i < 11) {
-breedte7 = 20 + (i * 12);
+breedte7 = 20 + (i * 12); //Elke keer 12 langer
 } else { 
   breedte7 = 140 - ((i - 10) * 12);
 }

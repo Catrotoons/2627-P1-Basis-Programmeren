@@ -12,13 +12,14 @@ let mijnGetallen = [];
 
 function setup() {
   createCanvas(380, 350);
+  noStroke();
   let Kleur1 = colors2.shift(); 
 colors2.push(Kleur1); 
 
-let Kleur2 = colors3.shift(); 
-colors3.push(Kleur2); 
-colors3.splice(1, 2);
-colors4.sort();
+let Kleur2 = colors3.shift(); //Shift betekent haalt eerste array weg
+colors3.push(Kleur2); //Push slaat de huidige instellingen voor het tekenen op
+colors3.splice(1, 2); //Haalt 1 en 2 weg
+colors4.sort(); 
 
 //8
 for (let i = 0; i < 5; i++) {
