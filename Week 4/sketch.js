@@ -67,4 +67,5 @@ if (keyCode === 8) { //8 is backspace als het goed is, had opgezocht
 Start =  true;
 return false; //Geen browserscrolling ofzo gewoon even uitproberen wat dit doet, want code werkt niet de heletijd
 }
+
 }
