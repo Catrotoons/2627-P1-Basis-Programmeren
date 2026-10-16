@@ -5,6 +5,9 @@ let plaatjeHealthbarVol;
 let plaatjeFoodBarVol;
 let plaatjeBinnenHuisDefault;
 let plaatjeKeuken;
+let plaatjeBadkamer;
+let plaatjeSlaapkamer;
+let plaatjeMinigame;
 
 //Basic Teleportaties
 let knopGaNaarBuiten;
@@ -16,6 +19,15 @@ let knopExitHuis;
 let knopSlapenKamer;
 let knopEtenKamer;
 let knopSchoonmakenKamer;
+let knopSlaapkamer;
+let knopMinigame;
+let knopLivingroom;
+
+//Knoppen voor acties
+let knopSpeel;
+let knopRest;
+let knopClean;
+let knopFeed;
 
 //Achtergrond
 let actieveAchtergrond;
@@ -44,25 +56,56 @@ function setup() {
   knopSpeel.position(30, 200);
   knopSpeel.mousePressed(speel);
   knopSpeel.size(150, 50);
+  knopSpeel.hide();
 
   knopRest = createButton('Sleep');
   knopRest.position(30, 260);
   knopRest.mousePressed(speel);
   knopRest.size(150, 50);
+  knopRest.hide();
+
+  knopClean = createButton('Clean');
+  knopClean.position(30, 260);
+  knopClean.mousePressed(maakSchoon);
+  knopClean.size(150, 50);
+  knopClean.hide();
+
+  knopFeed = createButton('Feed');
+  knopFeed.position(30, 260);
+  knopFeed.mousePressed(geefEten);
+  knopFeed.size(150, 50);
+  knopFeed.hide();
 
 //Inside rooms
   knopEtenKamer = createButton('Kitchen');
   knopEtenKamer.position(830, 160); 
   knopEtenKamer.mousePressed(enterKeuken); 
   knopEtenKamer.size(150, 50);
+  knopEtenKamer.hide();
 
   knopSchoonmakenKamer = createButton('Bathroom');
   knopSchoonmakenKamer.position(830, 220); 
   knopSchoonmakenKamer.mousePressed(enterBadkamer); 
   knopSchoonmakenKamer.size(150, 50);
+  knopSchoonmakenKamer.hide();
 
+  knopSlaapkamer = createButton('Bedroom');
+  knopSlaapkamer.position(830, 280);
+  knopSlaapkamer.mousePressed(enterBedroom);
+  knopSlaapkamer.size(150, 50);
+  knopSlaapkamer.hide();
 
+  knopMinigame = createButton('Minigame');
+  knopMinigame.position(830, 500);
+  knopMinigame.mousePressed(enterMinigame);
+  knopMinigame.size(150, 50);
+  knopMinigame.hide();
 
+  knopLivingroom = createButton('Livingroom');
+  knopLivingroom.position(830, 340);
+  knopLivingroom.mousePressed(enterLivingroom);
+  knopLivingroom.size(150, 50);
+  knopLivingroom.hide();
 }
 
 function preload() { //Images uploaden
@@ -71,8 +114,10 @@ function preload() { //Images uploaden
 plaatjeHealthbarVol = loadImage('hearts.png');
 plaatjeFoodBarVol = loadImage('foodBar.png');
 plaatjeBinnenHuisDefault = loadImage('Background2png.png');
-plaatjeKeuken = loadImage('Kitchenbackground11.png');
-
+plaatjeKeuken = loadImage('Kitchen.png');
+plaatjeBadkamer = loadImage('Bathroom.png');
+plaatjeSlaapkamer = loadImage('Bedroom.png');
+plaatjeMinigame = loadImage('Minigame.png');
 }
 
 
@@ -85,11 +130,12 @@ function draw() {
   //Character
   image(plaatjeTomodachiDefaultPose, 220, 35, 580, 750);
 
-  //Bars
+  //Bars (Change later)
   image(plaatjeHealthbarVol, 320, -760, 1400, 1000);
 image(plaatjeFoodBarVol, 30, -725, 1400, 900);
 }
 
+//Buttons functies
 function enterHuis() {
   actieveAchtergrond = plaatjeBinnenHuisDefault;
 
@@ -99,6 +145,9 @@ knopSpeel.show();
 knopRest.show();
 knopEtenKamer.show();
 knopSchoonmakenKamer.show();
+knopLivingroom.hide();
+knopSlaapkamer.show();
+knopMinigame.show();
 }
 
 function exitHuis() {
@@ -110,6 +159,13 @@ knopExitHuis.hide();
 knopRest.hide();
 knopEtenKamer.hide();
 knopSchoonmakenKamer.hide();
+knopMinigame.show();
+knopLivingroom.hide();
+knopSlaapkamer.hide();
+knopClean.hide();
+knopFeed.hide();
+
+text("Outside", 500, 100);
 }
 
 function enterKeuken() {
@@ -121,10 +177,76 @@ function enterKeuken() {
   knopEnterHuis.hide();
   knopEtenKamer.hide();
   knopSchoonmakenKamer.show();
+  knopSlaapkamer.show();
+  knopLivingroom.show();
+  knopClean.hide();
+knopFeed.show();
 }
 
-function enterBadkamer() {}
-
-function speel() {
+function enterBadkamer() {
+  actieveAchtergrond = plaatjeBadkamer;
+  knopSpeel.hide();
+  knopExitHuis.hide();
+  knopRest.hide();
+  knopEnterHuis.hide();
+  knopEtenKamer.show();
+  knopSchoonmakenKamer.hide();
+  knopSlaapkamer.show();
+  knopLivingroom.show();
+  knopClean.show();
+knopFeed.hide();
 }
+
+function enterBedroom() {
+  actieveAchtergrond = plaatjeSlaapkamer;
+  knopSpeel.show();
+  knopExitHuis.hide();
+  knopRest.show();
+  knopEnterHuis.hide();
+  knopEtenKamer.show();
+  knopSchoonmakenKamer.show();
+  knopMinigame.show();
+  knopSlaapkamer.hide();
+  knopLivingroom.show();
+  knopClean.hide();
+knopFeed.hide();
+}
+
+function enterLivingroom() {
+  actieveAchtergrond = plaatjeBinnenHuisDefault;
+knopExitHuis.show();
+knopEnterHuis.hide();
+knopSpeel.show();
+knopRest.show();
+knopEtenKamer.show();
+knopSchoonmakenKamer.show();
+knopLivingroom.hide();
+knopMinigame.show();
+knopSlaapkamer.show();
+knopClean.hide();
+knopFeed.hide();
+}
+
+function enterMinigame() {
+  actieveAchtergrond = plaatjeMinigame;
+  knopExitHuis.show();
+knopEnterHuis.hide();
+knopSpeel.hide();
+knopRest.hide();
+knopEtenKamer.hide();
+knopSchoonmakenKamer.hide();
+knopLivingroom.hide();
+knopSlaapkamer.hide();
+knopMinigame.hide();
+knopClean.hide();
+knopFeed.hide();
+}
+
+function speel() {}
+
+function maakSchoon() {}
+
+function geefEten() {}
+
+
 
