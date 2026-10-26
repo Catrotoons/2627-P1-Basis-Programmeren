@@ -1,3 +1,6 @@
+//Bewegingen 
+let loopSnelheid= 0;
+
 //Images toegevoegd
 let plaatjeTomodachiDefaultPose;
 let plaatjeBuitenHuis;
@@ -8,6 +11,10 @@ let plaatjeKeuken;
 let plaatjeBadkamer;
 let plaatjeSlaapkamer;
 let plaatjeMinigame;
+
+let plaatjeLopen = false;
+let plaatjeVies = false;
+let plaatjeLopenOmgedraaid = false;
 
 //Basic Teleportaties
 let knopGaNaarBuiten;
@@ -56,7 +63,6 @@ function setup() {
   knopSpeel.position(30, 200);
   knopSpeel.mousePressed(speel);
   knopSpeel.size(150, 50);
-  knopSpeel.hide();
 
   knopRest = createButton('Sleep');
   knopRest.position(30, 260);
@@ -99,13 +105,16 @@ function setup() {
   knopMinigame.position(830, 500);
   knopMinigame.mousePressed(enterMinigame);
   knopMinigame.size(150, 50);
-  knopMinigame.hide();
+
 
   knopLivingroom = createButton('Livingroom');
   knopLivingroom.position(830, 340);
   knopLivingroom.mousePressed(enterLivingroom);
   knopLivingroom.size(150, 50);
   knopLivingroom.hide();
+
+  //Functies voor games of default
+
 }
 
 function preload() { //Images uploaden
@@ -118,6 +127,9 @@ plaatjeKeuken = loadImage('Kitchen.png');
 plaatjeBadkamer = loadImage('Bathroom.png');
 plaatjeSlaapkamer = loadImage('Bedroom.png');
 plaatjeMinigame = loadImage('Minigame.png');
+plaatjeLopen = loadImage('loopvn.gif');
+plaatjeVies = loadImage('Dirty.png');
+plaatjeLopenOmgedraaid = loadImage('loopvnOmgedraaid.gif');
 }
 
 
@@ -128,11 +140,33 @@ function draw() {
   image(actieveAchtergrond, 0, 0, 1000, 850);
   
   //Character
-  image(plaatjeTomodachiDefaultPose, 220, 35, 580, 750);
+  image(plaatjeTomodachiDefaultPose, 220, 180, 475, 470);
+image(plaatjeLopen, 220 + loopSnelheid, 150, 500, 500);
+image(plaatjeLopenOmgedraaid, 220 - loopSnelheid, 150, 500, 500);
+//image(plaatjeVies, 350, 150, 550, 550);
 
   //Bars (Change later)
   image(plaatjeHealthbarVol, 320, -760, 1400, 1000);
 image(plaatjeFoodBarVol, 30, -725, 1400, 900);
+
+//Lopen loop
+loopSnelheid = loopSnelheid + 5;
+
+if (loopSnelheid > 650) {
+plaatjeLopenOmgedraaid = true;
+}
+
+if (plaatjeLopen = true) {
+plaatjeLopenOmgedraaid = false;
+}
+
+if (plaatjeLopenOmgedraaid = true) {
+plaatjeLopen = false;
+}
+
+//if (loopSnelheid > 650) {
+  //loopSnelheid = -600;}
+
 }
 
 //Buttons functies
@@ -247,6 +281,8 @@ function speel() {}
 function maakSchoon() {}
 
 function geefEten() {}
+
+function loop() {}
 
 
 
