@@ -9,8 +9,19 @@ let wachttijd = 60; //60 frames per seconde
 let loopSnelheid = 0;
 let richting = 4;
 let isAanHetLopen = true;
+let isAanHetLopenVies;
 
-//Bewegingen 
+//Eten
+let isAanHetEten = false;
+let isAanHetSlapen = false;
+
+//Bewegingen
+let etenTimer = 0;
+let slapenTimer = 0;
+let isAanHetSpelen = false;
+let speelFase = 0;
+let isAanHetSchoonmaken = false;
+let schoonmaakTimer = 0;
 
 //Images toegevoegd
 let plaatjeTomodachiDefaultPose;
@@ -20,7 +31,6 @@ let plaatjeKeuken;
 let plaatjeBadkamer;
 let plaatjeSlaapkamer;
 let plaatjeMinigame;
-let plaatjeSlapen;
 
 let plaatjeHPBar;
 let plaatjeHygieneBar;
@@ -30,6 +40,22 @@ let plaatjeBlijheidBar;
 let plaatjeVies = false;
 let plaatjeLopen = false;
 let plaatjeLopenOmgedraaid = false;
+let plaatjeEten = false;
+let plaatjeSlapen = false;
+let plaatjeSpeel1 = false;
+let plaatjeSpeel2 = false;
+let plaatjeSpeel3 = false;
+let plaatjeSchoon = false;
+
+let plaatjeLopenVies = false;
+let plaatjeLopenViesOmgedraaid = false;
+let plaatjeViesDefault = false;
+let plaatjeLopenMoe = false;
+let plaatjeLopenMoeOmgedraaid = false;
+let plaatjeDefaultMoe = false;
+let plaatjeDefaultSad = false;
+let plaatjeLopenSad = false;
+let plaatjeLopenSadOmgedraaid = false;
 
 //Basic Teleportaties
 let knopGaNaarBuiten;
@@ -60,13 +86,13 @@ function setup() {
   actieveAchtergrond = plaatjeBuitenHuis;
 
   //Outside
-  knopEnterHuis = createButton('Go inside');
+  knopEnterHuis = createButton('Ga naar binnen');
   knopEnterHuis.position(30, 50);  //Change buttons styles, (draw one)
   knopEnterHuis.mousePressed(enterHuis); 
   knopEnterHuis.size(220, 100);
   
 
-  knopExitHuis = createButton('Go outside');
+  knopExitHuis = createButton('Ga naar buiten');
   knopExitHuis.position(30, 50);  //Change buttons styles, (draw one)
   knopExitHuis.mousePressed(exitHuis); 
   knopExitHuis.size(220, 100);
@@ -74,43 +100,43 @@ function setup() {
   
 
 //Buttons for actions
-  knopSpeel = createButton('Play');
+  knopSpeel = createButton('Speel');
   knopSpeel.position(30, 200);
   knopSpeel.mousePressed(speel);
   knopSpeel.size(150, 50);
 
-  knopRest = createButton('Sleep');
+  knopRest = createButton('Slaap');
   knopRest.position(30, 260);
-  knopRest.mousePressed(speel);
+  knopRest.mousePressed(slaap);
   knopRest.size(150, 50);
   knopRest.hide();
 
-  knopClean = createButton('Clean');
+  knopClean = createButton('Maak schoon');
   knopClean.position(30, 260);
   knopClean.mousePressed(maakSchoon);
   knopClean.size(150, 50);
   knopClean.hide();
 
-  knopFeed = createButton('Feed');
+  knopFeed = createButton('Geef eten');
   knopFeed.position(30, 260);
   knopFeed.mousePressed(geefEten);
   knopFeed.size(150, 50);
   knopFeed.hide();
 
 //Inside rooms
-  knopEtenKamer = createButton('Kitchen');
+  knopEtenKamer = createButton('Keuken');
   knopEtenKamer.position(830, 190); 
   knopEtenKamer.mousePressed(enterKeuken); 
   knopEtenKamer.size(150, 50);
   knopEtenKamer.hide();
 
-  knopSchoonmakenKamer = createButton('Bathroom');
+  knopSchoonmakenKamer = createButton('Badkamer');
   knopSchoonmakenKamer.position(830, 250); 
   knopSchoonmakenKamer.mousePressed(enterBadkamer); 
   knopSchoonmakenKamer.size(150, 50);
   knopSchoonmakenKamer.hide();
 
-  knopSlaapkamer = createButton('Bedroom');
+  knopSlaapkamer = createButton('Slaapkamer');
   knopSlaapkamer.position(830, 310);
   knopSlaapkamer.mousePressed(enterBedroom);
   knopSlaapkamer.size(150, 50);
@@ -127,9 +153,6 @@ function setup() {
   knopLivingroom.mousePressed(enterLivingroom);
   knopLivingroom.size(150, 50);
   knopLivingroom.hide();
-
-  //Functies voor games of default
-
 }
 
 function preload() { //Images uploaden
@@ -148,6 +171,20 @@ plaatjeHPBar = loadImage('HP bar.png');
 plaatjeBlijheidBar = loadImage('Blijheid bar.png');
 plaatjeHygieneBar = loadImage('Hygiene bar.png');
 plaatjeEnergieBar = loadImage('Energie bar.png');
+plaatjeEten = loadImage('Eating.gif');
+plaatjeLopenVies = loadImage('Dirtywalk1.gif');
+plaatjeLopenViesOmgedraaid = loadImage('Walkdirty2.gif');
+plaatjeViesDefault = loadImage('Dirty.png');
+plaatjeLopenMoe = loadImage('Walktired1.gif');
+plaatjeLopenMoeOmgedraaid = loadImage('Walktired2.gif');
+plaatjeDefaultMoe = loadImage('Tired.png');
+plaatjeDefaultSad = loadImage('Sad.png');
+plaatjeLopenSad = loadImage('Walksad1.gif');
+plaatjeLopenSadOmgedraaid = loadImage('Walksad2.gif');
+plaatjeSpeel1 = loadImage('Play1.png');
+plaatjeSpeel2 = loadImage('Play2.png');
+plaatjeSpeel3 = loadImage('Play3.png');
+plaatjeSchoon = loadImage('Schoon.gif');
 }
 
 
@@ -160,6 +197,7 @@ function draw() {
   //Character
 //image(plaatjeVies, 350, 150, 550, 550);
 //image(plaatjeSlapen, 350, 150, 550, 550);
+//image(plaatjeEten, 350, 128, 550, 550);
 
 //Bars
 noStroke(); //Blijheid
@@ -184,6 +222,7 @@ image(plaatjeBlijheidBar, 520, -180, 700, 600);
 image(plaatjeHygieneBar, 320, -180, 700, 600);
 
 //Lopen loop / npcen
+
 wachttijd = wachttijd - 1; //Klok telt af
 
 if (wachttijd <= 0) { //Als de klok op 0 staat kiest een nieuwe actie
@@ -206,7 +245,7 @@ if (wachttijd <= 0) { //Als de klok op 0 staat kiest een nieuwe actie
 } 
 
 //Als het moet lopen, verander de X pos
-if (isAanHetLopen === true) {
+if (isAanHetLopen === true && isAanHetEten === false && isAanHetSlapen === false && isAanHetSpelen === false) {
   loopSnelheid = loopSnelheid + richting;
 }
 
@@ -218,48 +257,122 @@ if (loopSnelheid < -100) { //Muur links draai om naar rechts
   richting = 4;
 }
 
-//Teken exact EEN plaatje op basis van wat het doet
-if (isAanHetLopen === false) {
-    image(plaatjeTomodachiDefaultPose, 220 + loopSnelheid, 180, 475, 470); //Sta still
-  } 
-  else if (richting > 0) {
-    image(plaatjeLopen, 220 + loopSnelheid, 150, 500, 500); //Gaat naar rechts
-  } 
-  else {
-    image(plaatjeLopenOmgedraaid, 220 + loopSnelheid, 150, 500, 500); //Loopt naar links
-  }
+//Teken exact EEN plaatje op basis van wat het doet 
 
-  //Bars 
+if (isAanHetSchoonmaken === true) {
+  // We tekenen de GIF op dezelfde plek met een mooie grootte
+  image(plaatjeSchoon, 220 + loopSnelheid, 150, 500, 500);
+}
+
+if (isAanHetSpelen === true) {
+  if (speelFase === 1) {
+    image(plaatjeSpeel1, 220 + loopSnelheid, 190, 460, 460);
+  } else if (speelFase === 2) {
+    image(plaatjeSpeel2, 220 + loopSnelheid, 190, 460, 460);
+  } else if (speelFase === 3) {
+    image(plaatjeSpeel3, 220 + loopSnelheid, 190, 460, 460);
+  }
+}
+else if (isAanHetEten === true) {
+  image(plaatjeEten, 220 + loopSnelheid, 128, 550, 550);
+}
+else if (isAanHetSlapen === true) {
+  image(plaatjeSlapen, 220 + loopSnelheid, 128, 550, 550);
+}
+else if (hygiene <= 40) {
+  if (isAanHetLopen === false) {
+    image(plaatjeViesDefault, 220 + loopSnelheid, 180, 475, 470);
+  } else if (richting > 0) {
+    image(plaatjeLopenVies, 220 + loopSnelheid, 150, 500, 500);
+  } else {
+    image(plaatjeLopenViesOmgedraaid, 220 + loopSnelheid, 150, 500, 500);
+  }
+}
+else if (energie <= 40) {
+  if (isAanHetLopen === false) {
+    image(plaatjeDefaultMoe, 220 + loopSnelheid, 180, 475, 470);
+  } else if (richting > 0) {
+    image(plaatjeLopenMoe, 220 + loopSnelheid, 150, 500, 500);
+  } else {
+    image(plaatjeLopenMoeOmgedraaid, 220 + loopSnelheid, 150, 500, 500);
+  }
+}
+else if (blijheid <= 30) {
+  if (isAanHetLopen === false) {
+    image(plaatjeDefaultSad, 220 + loopSnelheid, 180, 475, 470);
+  } else if (richting > 0) {
+    image(plaatjeLopenSad, 220 + loopSnelheid, 150, 500, 500);
+  } else {
+    image(plaatjeLopenSadOmgedraaid, 220 + loopSnelheid, 150, 500, 500);
+  }
+}
+else if (isAanHetLopen === false) {
+  image(plaatjeTomodachiDefaultPose, 220 + loopSnelheid, 180, 475, 470);
+} 
+else if (richting > 0) {
+  image(plaatjeLopen, 220 + loopSnelheid, 150, 500, 500);
+} 
+else {
+  image(plaatjeLopenOmgedraaid, 220 + loopSnelheid, 150, 500, 500);
+}
+
+// Bars gecombineerd
   if (frameCount % 60 === 0) {
-  blijheid = blijheid - 1; // Wordt langzaam ongelukkig
+    if (energie > 0) {
+      energie = energie - 3;  //Word langzaam moe
+    }
+    if (hygiene > 0) {
+      hygiene = hygiene - 2;  //Worden langzaam vies
+    }
+    if (blijheid > 0) {
+      blijheid = blijheid - 5; //Word langzaam eenzaam
+    }
+
+    if (energie <= 0) {
+      hp = hp - 3; //Schade door uitputting
+    }
+    if (hygiene <= 0) {
+      hp = hp - 3; //Schade door onhygienisch zijn
+    }
+    if (blijheid <= 0) {
+      hp = hp - 2; //Schade door eenzaamheid
+    }
+    
+    if (hp < 0) {
+      hp = 0;
+    }
+  }
+
+  if (isAanHetEten === true) {
+  image(plaatjeEten, 220 + loopSnelheid, 128, 550, 550);
+} else if (hygiene <= 0) {
+} else if (energie <= 0) {
 }
 
-if (frameCount % 60 === 0) { 
-energie = energie - 1;  // Wordt langzaam moe
+if (etenTimer > 0) {
+  etenTimer = etenTimer - 1;
+  if (etenTimer <= 0) {
+    isAanHetEten = false;
+  }
 }
 
-if (frameCount % 60 === 0) {
-  //Alleen energie eraf halen als de energie nog groter is dan 0
-  if (energie > 0) {
-    energie = energie - 1;
-  }
+if (isAanHetSlapen === true) {
+  image(plaatjeSlapen, 220 + loopSnelheid, 128, 550, 550);
+} else if (hygiene <= 0) {
+} else if (energie <= 0) {
+}
 
-  if (hygiene > 0) {
-    hygiene = hygiene - 1;
+if (slapenTimer > 0) {
+  slapenTimer = slapenTimer - 1;
+  if (slapenTimer <= 0) {
+    isAanHetSlapen = false;
   }
+}
 
-  if (blijheid > 0) {
-    blijheid = blijheid - 1;
-  }
-
-  if (energie === 0) {
-    hp = hp - 1; // Schade door uitputting
-  }
-  if (hygiene === 0) {
-    hp = hp - 1; // Schade door onhygienisch
-  }
-  if (blijheid === 0) {
-    hp = hp - 1; // Schade door eenzaamheid
+if (isAanHetSchoonmaken === true) {
+  schoonmaakTimer = schoonmaakTimer - 1;
+  if (schoonmaakTimer <= 0) {
+    isAanHetSchoonmaken = false;
   }
 }
 
@@ -373,14 +486,72 @@ knopClean.hide();
 knopFeed.hide();
 }
 
-function speel() {} 
+function speel() {
+  isAanHetSpelen = true;
+  speelFase = 1;
+  blijheid = blijheid + 80;
+  if (blijheid > 100) {
+    blijheid = 100;
+} 
+}
 
-function maakSchoon() {}
+function mouseClicked() {
+  // Check of we in de speel-modus zitten
+  if (isAanHetSpelen === true) {
+    // We berekenen waar het poppetje op het scherm staat (X en Y)
+    let charX = 220 + loopSnelheid;
+    let charY = 190;
+    
+    //Checked of je ergens op het poppetje klikt
+    if (mouseX > charX && mouseX < charX + 460 && mouseY > charY && mouseY < charY + 460) {
+      speelFase = speelFase + 1; //Naar de volgende fase
+      
+      //Als het voorbij fase 3 zijn, is het spel klaar
+      if (speelFase > 3) {
+        isAanHetSpelen = false; // Stop met spelen
+        speelFase = 0;          // Reset de fase
+        
+       //Je krijgt hier pas happiness
+        blijheid = blijheid + 30;
+        if (blijheid > 100) {
+          blijheid = 100;
+        }
+      }
+    }
+  }
+}
 
-function geefEten() {}
+function maakSchoon() {
+  isAanHetSchoonmaken = true;
+  schoonmaakTimer = 90; // Hoelang de animatie duurt (in frames)
+
+  // Hygiene direct weer omhoog!
+  hygiene = hygiene + 80;
+  if (hygiene > 100) {
+    hygiene = 100;
+  }
+}
+
+function geefEten() {
+  isAanHetEten = true;
+  etenTimer = 65;
+
+  energie = energie + 20; 
+  if (energie > 100) {
+    energie = 100;
+  }
+}
 
 function loop() {}
 
-function slaap() {}
+function slaap() {
+  isAanHetSlapen = true;
+  slapenTimer = 90;
+
+  energie = energie + 80; 
+  if (energie > 100) {
+    energie = 100;
+  }
+}
 
 
